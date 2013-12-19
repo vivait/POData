@@ -178,6 +178,8 @@ class UriProcessor
                     if (!is_null($value)) {
                         $value = null;
                     } else {
+
+						// This is theoretically impossible to reach, but should that be changed, this will need to call ResourceType::getPropertyValue... somehow
                         try {
 	                        //see #88
                             $property = new \ReflectionProperty($value, $segment->getIdentifier());
@@ -234,7 +236,8 @@ class UriProcessor
                 $this->request->getFilterInfo(),
                 $this->request->getInternalOrderByInfo(),
                 $this->request->getTopCount(),
-                $this->request->getSkipCount()
+                $this->request->getSkipCount(),
+				$this->request->getInternalSkipTokenInfo()
             );
             $segment->setResult($queryResult);
         }
